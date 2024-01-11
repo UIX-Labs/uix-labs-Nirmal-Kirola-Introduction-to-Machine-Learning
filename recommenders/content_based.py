@@ -60,11 +60,13 @@ def content_based_recommendation(movie):
 
 
     # create an object for TfidfVectorizer: tfidf_vector
-    tfidf_vector = None
-    # apply the object to the genres column: tfidf_matrix
-    tfidf_matrix = None
-    # create the cosine similarity matrix: sim_matrix
-    sim_matrix = None
+    tfidf_vector = TfidfVectorizer(stop_words='english')
+    # apply the object to the genres column
+    tfidf_matrix = tfidf_vector.fit_transform(movies['genres'])
+
+    
+    # create the cosine similarity matrix
+    sim_matrix = linear_kernel(tfidf_matrix,tfidf_matrix) 
     ############################################################################################
     # a function to convert index to title_year
     def get_title_year_from_index(index):
